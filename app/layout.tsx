@@ -1,4 +1,4 @@
-// import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layouts/header";
@@ -13,40 +13,25 @@ const notoSansJP = Noto_Sans_JP({
   display: "swap",
 });
 
-// ✅ デフォルトOGP画像
-// const defaultOGP = "https://meshiden.jp/ogp-default.jpg";
+// ✅ 静的メタデータ（OGP含む）
+export const metadata: Metadata = {
+  title: "飯田優斗｜オフィシャルストア",
+  description: "フロントエンドエンジニア兼UIデザイナー、飯田優斗のオフィシャルストアです。",
+  openGraph: {
+    title: "飯田優斗｜オフィシャルストア",
+    description: "フロントエンドエンジニア兼UIデザイナー、飯田優斗のオフィシャルストアです。",
+    url: "https://meshiden.jp",
+    images: [{ url: "https://meshiden.jp/ogp-default.jpg" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "飯田優斗｜オフィシャルストア",
+    description: "フロントエンドエンジニア兼UIデザイナー、飯田優斗のオフィシャルストアです。",
+    images: ["https://meshiden.jp/ogp-default.jpg"],
+  },
+};
 
-// // ✅ メタデータを動的に生成
-// export async function generateMetadata(
-//   { params }: { params: { id?: string } }
-// ): Promise<Metadata> {
-//   const baseUrl = "https://meshiden.jp";
-//   let ogImage = defaultOGP;
-//   let title = "飯田優斗｜ポートフォリオサイト";
-//   let description = "フロントエンドエンジニア兼UIデザイナー、飯田優斗のポートフォリオサイトです。";
-//   let url = baseUrl;
-
-//   return {
-//     title,
-//     description,
-//     openGraph: {
-//       title,
-//       description,
-//       url,
-//       images: [{ url: ogImage }],
-//     },
-//     twitter: {
-//       card: "summary_large_image",
-//       title,
-//       description,
-//       images: [ogImage],
-//     },
-//   };
-// }
-
-// ✅ ルートレイアウトコンポーネント
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-
   return (
     <html lang="ja">
       <head>
@@ -58,10 +43,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
         </div>
         <Footer />
-
         {/* ✅ FontAwesome のスクリプト */}
         <Script src="https://kit.fontawesome.com/4e6b2556d7.js" strategy="afterInteractive" />
-
       </body>
     </html>
   );
